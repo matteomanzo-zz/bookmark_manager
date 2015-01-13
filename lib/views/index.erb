@@ -1,0 +1,10 @@
+<center>
+<h1 style="font-family: Futura">Hi Bookmark App!</h1>
+
+<ul>
+  <% @links.each do |link| %>
+    <li><a href="<%= link.url %>"><%= link.title %></a></li>
+  <%end%>
+</ul>
+
+</center>
