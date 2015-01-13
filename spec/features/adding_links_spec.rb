@@ -4,7 +4,7 @@ feature "User adds a new link" do
 
   scenario "when adds a new link" do
 
-    expect(link.count). to eq 0
+    expect(Link.count). to eq 0
     visit '/'
     add_link("http://www.makersacademy.com/", "Makers Academy")
     expect(Link.count).to eq 1
