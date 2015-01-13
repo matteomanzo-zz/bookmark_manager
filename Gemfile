@@ -10,4 +10,5 @@ group :development, :test do
   gem 'cucumber'
   gem 'launchy'
   gem 'rspec'
+  gem 'database_cleaner'
 end
