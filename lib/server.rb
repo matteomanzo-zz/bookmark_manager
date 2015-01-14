@@ -16,6 +16,7 @@ DataMapper.auto_upgrade!
 
 
 class Bookmark < Sinatra::Base
+
   get '/' do
     @links = Link.all
     erb :index
@@ -29,6 +30,12 @@ class Bookmark < Sinatra::Base
     end
     Link.create(:url => url, :title => title, :tags => tags)
     redirect to('/')
+  end
+
+  get '/tags/:text' do
+    tag = Tag.first(:text => params[:text])
+    @links = tag ? tag.links : []
+    erb :index
   end
 
   # start the server if ruby file executed directly
