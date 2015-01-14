@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/styles.css">
   </head>
+  <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
   <body>
   <% if current_user %>
     Welcome, <%= current_user.email %>
