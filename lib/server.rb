@@ -2,20 +2,16 @@ require 'sinatra/base'
 require 'data_mapper'
 require './lib/link'
 require './lib/tag'
-
-# is ENV defined? If yes, use directly; if no, call development.
-env = ENV['RACK_ENV'] || 'development'
-
-DataMapper::Logger.new($stdout, :debug)
-
-DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
-
-DataMapper.finalize
-
-DataMapper.auto_upgrade!
-
+require './lib/user'
+require './lib/helpers/application'
+require './lib/data_mapper_setup'
 
 class Bookmark < Sinatra::Base
+
+include Application
+
+enable :sessions
+set :session_secret, 'super secret'
 
   get '/' do
     @links = Link.all
@@ -36,6 +32,17 @@ class Bookmark < Sinatra::Base
     tag = Tag.first(:text => params[:text])
     @links = tag ? tag.links : []
     erb :index
+  end
+
+  get '/users/new' do
+    erb :"users/new"
+  end
+
+  post '/users' do
+    user = User.create(:email => params[:email],
+                :password => params[:password])
+    session[:user_id] = user.id
+    redirect to('/')
   end
 
   # start the server if ruby file executed directly

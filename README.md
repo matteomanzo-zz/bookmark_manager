@@ -3,8 +3,8 @@ Bookmark Manager
 This project is about the creation of a bookmark where you can save your links and add tags to them.
 
 
-###tags          
----           
+###tags  
+      
 id | text     
 --- | ---     
 1 | search    
@@ -15,7 +15,7 @@ id | text
 
 
 ###links
----
+
 id | title | tags
 --- | --- | ---
 1 | Google | search
