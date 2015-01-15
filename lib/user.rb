@@ -10,7 +10,7 @@ class User
   validates_uniqueness_of :email # We could get rid of this
 
   property :id, Serial
-  property :email, String, :unique => true, :message => "This email is already taken"
+  property :email, String, :unique => true # we could put a :message here => "this email is already take"
 
   property :password_digest, Text
 
