@@ -5,8 +5,13 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/styles.css">
   </head>
-  <% if flash[:notice] %>
-    <div id="notice"><%= flash[:notice] %></div>
+  <% if flash[:errors] && !flash[:errors].empty? %>
+  Sorry, there were the following problems with the form.
+    <ul id="notice">
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
   <% end %>
   <body>
   <% if current_user %>

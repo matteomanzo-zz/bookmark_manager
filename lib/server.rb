@@ -38,7 +38,6 @@ set :session_secret, 'super secret'
 
   get '/users/new' do
     @user = User.new
-    puts "Within New $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     puts @user.object_id
     erb :"users/new"
   end
@@ -47,8 +46,6 @@ set :session_secret, 'super secret'
     @user = User.new(:email => params[:email],
                 :password => params[:password],
                 :password_confirmation => params[:password_confirmation])
-
-    puts "Within Post Users $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     puts @user.object_id
 
 
@@ -56,7 +53,7 @@ set :session_secret, 'super secret'
       session[:user_id] = @user.id
       redirect to('/')
     else
-      flash[:notice] = "Sorry, your passwords does not match"
+      flash.now[:errors] = @user.errors.full_messages
       erb :"users/new"
     end
   end
