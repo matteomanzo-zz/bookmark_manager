@@ -12,8 +12,9 @@ class Bookmark < Sinatra::Base
 include Application
 
 enable :sessions
-use Rack::Flash
 set :session_secret, 'super secret'
+use Rack::Flash
+use Rack::MethodOverride
 
   get '/' do
     @links = Link.all
@@ -56,6 +57,12 @@ set :session_secret, 'super secret'
       flash[:errors] = ["The email or password is incorrect"]
       erb :"sessions/new"
     end
+  end
+
+  delete '/sessions' do
+    flash[:notice] = "Good bye!"
+    session[:user_id] = nil
+    redirect to('/')
   end
 
   post '/users' do
